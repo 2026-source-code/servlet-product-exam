@@ -18,7 +18,7 @@ public class DispatcherServlet extends HttpServlet {
         // DBConnection.getConnection();
         String cmd = req.getParameter("cmd");
         if ("list".equals(cmd)) {
-            View view = ViewResolver.render("list");
+            View view = ViewResolver.render("detail");
             view.forward(req, resp);
             return;
         }

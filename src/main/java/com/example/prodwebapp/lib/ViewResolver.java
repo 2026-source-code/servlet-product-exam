@@ -10,8 +10,11 @@ import com.samskivert.mustache.Template;
 
 import jakarta.servlet.ServletException;
 
+// SRP(단일책임의원칙) : 
+// templates폴더에 mustache 파일이 있어서 그걸 연결해주는 친구
 public class ViewResolver {
 
+    // mustache 파일을 읽어서 -> Servlet으로 변경해서 리턴턴
     public static View render(String viewName) throws ServletException, IOException {
         String resourcePath = "templates/" + viewName + ".mustache";
         InputStream in = ViewResolver.class.getClassLoader()
