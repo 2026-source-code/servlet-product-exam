@@ -2,8 +2,8 @@ package com.example.prodwebapp;
 
 import java.io.IOException;
 
-import com.example.prodwebapp.lib.View;
 import com.example.prodwebapp.lib.ViewResolver;
+import com.example.prodwebapp.product.ProductController;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,31 +14,39 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("*.do")
 public class DispatcherServlet extends HttpServlet {
 
+    ProductController pc = new ProductController();
+
     // localhost:8080/product.do?cmd=list
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1. 라우팅
         String cmd = req.getParameter("cmd");
-        switch (cmd) {
-            case "list":
-                ViewResolver.render("list").forward(req, resp);
-                break;
-            case "insert-form":
-                ViewResolver.render("insert-form").forward(req, resp);
-                break;
-            case "detail":
-                ViewResolver.render("detail").forward(req, resp);
-                break;
-            default:
-                break;
+        if ("list".equals(cmd)) {
+            String viewName = pc.list(req, resp);
+            ViewResolver.render(viewName).forward(req, resp);
+        } else if ("insert-form".equals(cmd)) {
+            String viewName = pc.insertForm(req, resp);
+            ViewResolver.render(viewName).forward(req, resp);
+        } else if ("detail".equals(cmd)) {
+            String viewName = pc.detail(req, resp);
+            ViewResolver.render(viewName).forward(req, resp);
         }
     }
 
-    // delete, post 두 요청을 이 메서드로 받을 예정
-    // 이유 : form 태그는 post, get 요청만 할 수 있다.
+    // localhost:8080/product.do?cmd=insert
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-    }
+        // 1. 라우팅
+        String cmd = req.getParameter("cmd");
+        if ("insert".equals(cmd)) {
+            // url = /product.do?cmd=list
+            String url = pc.insert(req, resp);
+            // resp.sendRedirect(url);
 
+            // 리다이렉션 (재요청)
+            resp.setStatus(302);
+            resp.setHeader("Location", url);
+        }
+    }
 }

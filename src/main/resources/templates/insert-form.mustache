@@ -12,10 +12,10 @@
     </ul>
     <h1>상품등록</h1>
     <hr>
-    <form action="#" method="post" enctype="application/x-www-form-urlencoded">
-        상품명 : <input type="text" name="name" /> <br/>
-        가격 : <input type="text" name="price" /> <br/>
-        개수 : <input type="text" name="qty" /> <br/>
+    <form action="/product.do?cmd=insert" method="post" enctype="application/x-www-form-urlencoded">
+        상품명 : <input type="text" name="name" required/> <br/>
+        가격 : <input type="text" name="price" required/> <br/>
+        개수 : <input type="text" name="qty" required/> <br/>
         <button type="submit">상품등록</button>
     </form>
 </body>

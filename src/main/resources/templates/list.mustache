@@ -11,6 +11,7 @@
         <li><a href="/product.do?cmd=insert-form">상품등록</a></li>
     </ul>
     <h1>상품 목록</h1>
+    <h1>what : {{what}}</h1>
     <hr>
     <table border="1">
         <tr>
@@ -18,24 +19,21 @@
             <td>name</td>
             <td>액션</td>
         </tr>
+
+
+        {{#models}}
         <tr>
-            <td>1</td>
-            <td><a href="/product.do?cmd=detail&id=1">바나나</a></td>
+            <td>{{id}}</td>
+            <td><a href="/product.do?cmd=detail&id={{id}}">{{name}}</a></td>
             <td>
-                <form action="#" method="post">
+                <form action="/product.do?cmd=delete&id={{id}}" method="post">
                     <button type="submit">삭제</button>
                 </form>
             </td>
         </tr>
-        <tr>
-            <td>2</td>
-            <td><a href="/product.do?cmd=detail&id=2">감자</a></td>
-            <td>
-                <form action="#" method="post">
-                    <button type="submit">삭제</button>
-                </form>
-            </td>
-        </tr>
+        {{/models}}
+
+ 
     </table>
 </body>
 </html>
