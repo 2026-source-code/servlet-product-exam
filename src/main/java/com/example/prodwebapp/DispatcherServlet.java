@@ -47,6 +47,7 @@ public class DispatcherServlet extends HttpServlet {
             // 리다이렉션 (재요청)
             resp.setStatus(302);
             resp.setHeader("Location", url);
+
         }
     }
 }
