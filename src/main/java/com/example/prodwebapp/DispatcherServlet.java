@@ -41,9 +41,8 @@ public class DispatcherServlet extends HttpServlet {
         String cmd = req.getParameter("cmd");
         if ("insert".equals(cmd)) {
             // url = /product.do?cmd=list
-            String url = pc.insert(req, resp);
-            resp.setStatus(302);
-            resp.setHeader("Location", url);
+            String viewName = pc.insert(req, resp);
+            ViewResolver.render(viewName).forward(req, resp);
         }
     }
 }

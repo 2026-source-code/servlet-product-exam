@@ -38,7 +38,7 @@ public class ProductController {
         int qty2 = Integer.parseInt(qty);
         productService.상품등록(name, price2, qty2);
 
-        return "/product.do?cmd=list"; // 주소 url
+        return "list"; // 뷰이름
     }
 
 }
