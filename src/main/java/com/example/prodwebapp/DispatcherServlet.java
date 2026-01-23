@@ -42,12 +42,8 @@ public class DispatcherServlet extends HttpServlet {
         if ("insert".equals(cmd)) {
             // url = /product.do?cmd=list
             String url = pc.insert(req, resp);
-            // resp.sendRedirect(url);
-
-            // 리다이렉션 (재요청)
             resp.setStatus(302);
             resp.setHeader("Location", url);
-
         }
     }
 }
