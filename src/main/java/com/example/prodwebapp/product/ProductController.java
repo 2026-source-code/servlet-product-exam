@@ -1,6 +1,5 @@
 package com.example.prodwebapp.product;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,6 +37,12 @@ public class ProductController {
         int qty2 = Integer.parseInt(qty);
         productService.상품등록(name, price2, qty2);
 
+        return "/product.do?cmd=list"; // 주소 url
+    }
+
+    public String delete(HttpServletRequest req, HttpServletResponse resp) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        productService.상품삭제(id);
         return "/product.do?cmd=list"; // 주소 url
     }
 

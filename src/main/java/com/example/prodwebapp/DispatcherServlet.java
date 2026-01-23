@@ -1,6 +1,7 @@
 package com.example.prodwebapp;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.example.prodwebapp.lib.ViewResolver;
 import com.example.prodwebapp.product.ProductController;
@@ -34,6 +35,7 @@ public class DispatcherServlet extends HttpServlet {
     }
 
     // localhost:8080/product.do?cmd=insert
+    // localhost:8080/product.do?cmd=delete&id=6
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -44,6 +46,9 @@ public class DispatcherServlet extends HttpServlet {
             String url = pc.insert(req, resp);
             resp.setStatus(302);
             resp.setHeader("Location", url);
+        } else if ("delete".equals(cmd)) {
+            String url = pc.delete(req, resp);
+            resp.sendRedirect(url);
         }
     }
 }
